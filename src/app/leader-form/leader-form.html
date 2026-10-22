@@ -1,0 +1,72 @@
+<section class="panel">
+  <h2>{{ editingId() ? 'Update Leader' : 'Register Leader' }}</h2>
+
+  <form [formGroup]="leaderForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="name">Leader Name</label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div class="field">
+      <label for="region">Region</label>
+      <input id="region" type="text" formControlName="region">
+    </div>
+
+    <div class="field">
+      <label for="town">Town</label>
+      <input id="town" type="text" formControlName="town">
+    </div>
+
+    <div class="field">
+      <label for="badge">Badge</label>
+      <input id="badge" type="text" formControlName="badge">
+    </div>
+
+    <div class="field">
+      <label for="specialty">Specialty</label>
+      <input id="specialty" type="text" formControlName="specialty">
+    </div>
+
+
+    <div class="field">
+      <label for="aceLevel">Ace Level</label>
+      <input id="aceLevel" type="number" formControlName="aceLevel">
+    </div>
+
+    <div class="field">
+      <label for="motto">Motto</label>
+      <input id="motto" type="text" formControlName="motto">
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn-submit" [disabled]="leaderForm.invalid">
+        {{ editingId() ? 'Confirm Update' : 'Add to Registry' }}
+      </button>
+
+      @if (editingId()) {
+        <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+      }
+    </div>
+  </form>
+</section>
+
+
+<section class="panel">
+  <h2>Gary's Winning Team</h2>
+  <div class="team">
+    @for (l of leaderService.leaderList(); track p._id) {
+      <div class="card" [class.editing]="editingId() === l._id">
+        <h3>{{ l.name }} (Lvl {{ l.aceLevel }})</h3>
+        <p>{{ l.region }} | {{ l.town }}</p>
+        <p>{{ l.badge }} | {{ l.specialty }}</p>
+        <p>{{ l.motto }}</p>
+        <div class="card-actions">
+          <button type="button" class="btn-edit" (click)="startEdit(l)">Edit</button>
+          <button type="button" class="btn-delete" (click)="deleteLeader(l._id)">Delete</button>
+        </div>
+      </div>
+    } @empty {
+      <p class="empty">No Leader recorded.</p>
+    }
+  </div>
+</section>

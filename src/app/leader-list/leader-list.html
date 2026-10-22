@@ -1,0 +1,23 @@
+<h1>Gym Leaders</h1>
+
+<div class="filters">
+  @for (region of regions; track region) {
+    <button
+      type="button"
+      [class.selected]="selectedRegion() === region"
+      (click)="setRegion(region)"
+    >{{ region }}</button>
+  }
+</div>
+
+<div class="grid">
+  @for (leader of filteredLeaders(); track leader._id) {
+    <app-leader-card
+      [leader]="leader"
+      (edit)="onEdit($event)"
+      (remove)="onRemove($event)"
+    />
+  } @empty {
+    <p class="empty">No Gym Leaders registered yet.</p>
+  }
+</div>

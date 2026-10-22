@@ -1,0 +1,8 @@
+<nav class="navbar">
+  <a class="brand" routerLink="/home">Gym Leader Registry</a>
+  <div class="links">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/leaders" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Leaders</a>
+    <a routerLink="/leaders/new" routerLinkActive="active">Add Leader</a>
+  </div>
+</nav>

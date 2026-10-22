@@ -1,0 +1,15 @@
+.hero { text-align: center; margin-bottom: 32px; }
+.hero h1 { margin-bottom: 8px; }
+.counts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+.count {
+  padding: 24px;
+  text-align: center;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.num { display: block; font-size: 2.5rem; }
+.kanto { background: #d9534f; }
+.johto { background: #e0a800; }
+.hoenn { background: #2a8f6a; }

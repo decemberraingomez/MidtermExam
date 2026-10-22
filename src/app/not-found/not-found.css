@@ -1,0 +1,10 @@
+.not-found { text-align: center; padding: 48px 0; }
+.not-found a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: #cc0000;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+}

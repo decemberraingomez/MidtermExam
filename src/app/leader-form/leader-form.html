@@ -1,72 +1,80 @@
 <section class="panel">
-  <h2>{{ editingId() ? 'Update Leader' : 'Register Leader' }}</h2>
+  <h1>{{ editingId() ? 'Edit Gym Leader' : 'Register a Gym Leader' }}</h1>
 
   <form [formGroup]="leaderForm" (ngSubmit)="onSubmit()">
     <div class="field">
-      <label for="name">Leader Name</label>
+      <label for="name">Name</label>
       <input id="name" type="text" formControlName="name">
+      @if (showError('name')) {
+        <small class="error">
+          @if (leaderForm.controls.name.hasError('required')) { Name is required. }
+          @else { Name must be at least 2 characters. }
+        </small>
+      }
     </div>
 
     <div class="field">
       <label for="region">Region</label>
-      <input id="region" type="text" formControlName="region">
+      <select id="region" formControlName="region">
+        <option value="" disabled>Select a region</option>
+        @for (r of regions; track r) {
+          <option [value]="r">{{ r }}</option>
+        }
+      </select>
+      @if (showError('region')) {
+        <small class="error">Region is required.</small>
+      }
     </div>
 
     <div class="field">
       <label for="town">Town</label>
       <input id="town" type="text" formControlName="town">
+      @if (showError('town')) {
+        <small class="error">Town is required.</small>
+      }
     </div>
 
     <div class="field">
       <label for="badge">Badge</label>
       <input id="badge" type="text" formControlName="badge">
+      @if (showError('badge')) {
+        <small class="error">Badge is required.</small>
+      }
     </div>
 
     <div class="field">
       <label for="specialty">Specialty</label>
       <input id="specialty" type="text" formControlName="specialty">
+      @if (showError('specialty')) {
+        <small class="error">Specialty is required.</small>
+      }
     </div>
 
-
     <div class="field">
-      <label for="aceLevel">Ace Level</label>
+      <label for="aceLevel">Ace level</label>
       <input id="aceLevel" type="number" formControlName="aceLevel">
+      @if (showError('aceLevel')) {
+        <small class="error">Ace level must be a whole number between 1 and 100.</small>
+      }
     </div>
 
     <div class="field">
-      <label for="motto">Motto</label>
-      <input id="motto" type="text" formControlName="motto">
+      <label for="motto">Motto (optional)</label>
+      <textarea id="motto" rows="3" formControlName="motto"></textarea>
+      @if (showError('motto')) {
+        <small class="error">Motto must be at most 150 characters.</small>
+      }
     </div>
+
+    @if (serverError()) {
+      <p class="error server-error">{{ serverError() }}</p>
+    }
 
     <div class="actions">
       <button type="submit" class="btn-submit" [disabled]="leaderForm.invalid">
-        {{ editingId() ? 'Confirm Update' : 'Add to Registry' }}
+        {{ editingId() ? 'Save Changes' : 'Add Leader' }}
       </button>
-
-      @if (editingId()) {
-        <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancel</button>
-      }
+      <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
     </div>
   </form>
-</section>
-
-
-<section class="panel">
-  <h2>Leader Registry</h2>
-  <div class="team">
-    @for (l of leaderService.leaderList(); track l._id) {
-      <div class="card" [class.editing]="editingId() === l._id">
-        <h3>{{ l.name }} (Lvl {{ l.aceLevel }})</h3>
-        <p>{{ l.region }} | {{ l.town }}</p>
-        <p>{{ l.badge }} | {{ l.specialty }}</p>
-        <p>"{{ l.motto }}"</p>
-        <div class="card-actions">
-          <button type="button" class="btn-edit" (click)="startEdit(l)">Edit</button>
-          <button type="button" class="btn-delete" (click)="deleteLeader(l._id)">Delete</button>
-        </div>
-      </div>
-    } @empty {
-      <p class="empty">No Leader recorded.</p>
-    }
-  </div>
 </section>

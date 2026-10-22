@@ -59,7 +59,7 @@
         <h3>{{ l.name }} (Lvl {{ l.aceLevel }})</h3>
         <p>{{ l.region }} | {{ l.town }}</p>
         <p>{{ l.badge }} | {{ l.specialty }}</p>
-        <p>{{ l.motto }}</p>
+        <p>"{{ l.motto }}"</p>
         <div class="card-actions">
           <button type="button" class="btn-edit" (click)="startEdit(l)">Edit</button>
           <button type="button" class="btn-delete" (click)="deleteLeader(l._id)">Delete</button>

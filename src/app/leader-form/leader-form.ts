@@ -17,13 +17,13 @@ export class LeaderForm implements OnInit {
   editingId = signal<string | null>(null);
 
   leaderForm = this.formBuilder.nonNullable.group({
-    name: ['', Validators.required],
-    region: ['', Validators.required],
+    name: ['', Validators.required, Validators.minLength(2)],
+    region: ['', Validators.required, Validators.pattern(/^(Kanto|Johto|Hoenn)$/)],
     town: ['', Validators.required],
     badge: ['', Validators.required],
     specialty: ['', Validators.required],
-    aceLevel: [1, [Validators.required, Validators.min(1)]],
-    motto: ['', Validators.required],
+    aceLevel: [1, [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^[0-9]+$/)]],
+    motto: ['', Validators.required, [Validators.maxLength(150)]],
   });
 
   ngOnInit() {

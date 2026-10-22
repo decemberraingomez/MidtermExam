@@ -9,21 +9,21 @@ export class Leader {
   private apiUrl = 'http://localhost:3000/api/leader';
 
   //Reactive state management using signals
-  pokemonList = signal<any[]>([]);
+  leaderList = signal<any[]>([]);
 
-  fetchPokemon(){
-    this.http.get<any[]>(this.apiUrl).subscribe(data => this.pokemonList.set(data));
+  fetchLeader(){
+    this.http.get<any[]>(this.apiUrl).subscribe(data => this.leaderList.set(data));
   }
 
-  savePokemon(data: any){
+  saveLeader(data: any){
     return this.http.post(this.apiUrl, data);
   }
 
-  updatePokemon(id: string, data: any){
+  updateLeader(id: string, data: any){
     return this.http.put(`${this.apiUrl}/${id}`, data);
   }
 
-  deletePokemon(id: string){
+  deleteLeader(id: string){
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

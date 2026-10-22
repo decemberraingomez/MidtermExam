@@ -52,9 +52,9 @@
 
 
 <section class="panel">
-  <h2>Gary's Winning Team</h2>
+  <h2>Leader Registry</h2>
   <div class="team">
-    @for (l of leaderService.leaderList(); track p._id) {
+    @for (l of leaderService.leaderList(); track l._id) {
       <div class="card" [class.editing]="editingId() === l._id">
         <h3>{{ l.name }} (Lvl {{ l.aceLevel }})</h3>
         <p>{{ l.region }} | {{ l.town }}</p>
